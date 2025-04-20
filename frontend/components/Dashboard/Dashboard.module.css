@@ -1,0 +1,252 @@
+/* Dashboard.module.css */
+
+.dashboardWrapper {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 5rem; /* Adjust for potentially larger or different fixed Navbar */
+  box-sizing: border-box;
+  background-color: #f8f9fa; /* Very light background for overall feel */
+}
+
+.sidebar {
+  width: 260px; /* Slightly wider sidebar for better content spacing */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #343a40; /* Darker, professional sidebar background */
+  color: #adb5bd; /* Light text color for contrast */
+  padding-top: 2rem; /* Add some top padding */
+}
+
+.sidebar h2 {
+  color: #fff; /* White heading in the sidebar */
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #495057; /* Subtle separator */
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li a {
+  display: block;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: #adb5bd;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar li a:hover {
+  background-color: #495057;
+  color: #fff;
+}
+
+.dashboardContent {
+  margin-left: 260px; /* Adjust margin to match the wider sidebar */
+  padding: 3rem; /* Increased padding for more spacious content area */
+  width: calc(100% - 260px);
+  background-color: #fff;
+}
+
+.dashboardHeading {
+  font-size: 2.2rem; /* Slightly reduced heading size for a more subtle feel */
+  font-weight: 600; /* Slightly less bold */
+  color: #343a40; /* Darker heading color */
+  margin-bottom: 2.5rem;
+  text-align: left; /* Align heading to the left for a more formal layout */
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Slightly wider min-width for cards */
+  gap: 2.5rem; /* Increased gap for better visual separation */
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 8px; /* Slightly less rounded corners */
+  padding: 2rem; /* Consistent padding */
+  text-align: left; /* Align text within cards to the left for better readability */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* Subtler shadow */
+  border: 1px solid #e0e0e0; /* Add a very light border */
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06); /* Slightly enhanced shadow on hover */
+  transform: translateY(-3px); /* Less pronounced hover lift */
+}
+
+.card h2 {
+  font-size: 1.8rem; /* Slightly smaller card heading */
+  color: #007bff; /* Professional blue accent color */
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #6c757d; /* Muted text color */
+  line-height: 1.7; /* Improved line height for readability */
+  margin-bottom: 0; /* Remove default bottom margin */
+}
+
+.card .value {
+  font-size: 2.8rem; /* Larger font size for the key value */
+  font-weight: 700;
+  color: #28a745; /* Professional green for positive values */
+  margin-bottom: 0.25rem;
+}
+
+.card .label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-transform: uppercase; /* Subtle emphasis */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 200px; /* Adjust sidebar width on smaller screens */
+  }
+
+  .dashboardContent {
+    margin-left: 200px; /* Adjust content margin */
+    padding: 2rem;
+  }
+
+  .dashboardHeading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+}
+
+.sectionHeading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.tableContainer {
+  overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+  margin-bottom: 2rem;
+}
+
+.statementTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.8rem; /* Slightly reduce font size to fit more columns */
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.statementTable thead th {
+  background-color: #f8f9fa;
+  color: #333;
+  font-weight: 500;
+  text-align: left;
+  padding: 0.5rem 0.75rem; /* Reduce padding */
+  border-bottom: 2px solid #e0e0e0;
+  white-space: nowrap; /* Prevent text wrapping in headers */
+}
+
+.statementTable tbody td {
+  padding: 0.5rem 0.75rem; /* Reduce padding */
+  border-bottom: 1px solid #f0f0f0;
+  white-space: nowrap; /* Prevent text wrapping in cells */
+}
+
+.statementTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.statementTable tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.negative {
+  color: #dc3545; /* Red for negative balance */
+  font-weight: 500;
+}
+
+.positive {
+  color: #28a745; /* Green for positive balance */
+  font-weight: 500;
+}
+
+.error {
+  color: #dc3545;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments for the table */
+@media (max-width: 992px) {
+  .statementTable {
+    font-size: 0.7rem; /* Further reduce font size on medium screens */
+  }
+
+  .statementTable thead th,
+  .statementTable tbody td {
+    padding: 0.4rem 0.6rem; /* Further reduce padding */
+  }
+}
+
+@media (max-width: 768px) {
+  .statementTable {
+    font-size: 0.6rem; /* Further reduce font size on small screens */
+  }
+
+  .statementTable thead th,
+  .statementTable tbody td {
+    padding: 0.3rem 0.5rem; /* Further reduce padding */
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardWrapper {
+    flex-direction: column; /* Stack sidebar and content on smaller screens */
+    padding-top: 0; /* Remove top padding when stacking */
+  }
+
+  .sidebar {
+    position: static; /* Make sidebar scrollable */
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #495057;
+    padding-bottom: 1.5rem;
+  }
+
+  .dashboardContent {
+    margin-left: 0; /* Remove left margin */
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .dashboardHeading {
+    text-align: center; /* Center heading on smaller screens */
+  }
+
+  .cards {
+    grid-template-columns: 1fr; /* Single column layout for cards on small screens */
+    gap: 1.5rem;
+  }
+}

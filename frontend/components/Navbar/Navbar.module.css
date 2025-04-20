@@ -1,0 +1,91 @@
+/* Navbar Styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(15px) saturate(180%);
+  z-index: 30;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e5e7eb;
+  border-radius: 0 0 12px 12px;
+}
+
+.logo a {
+  display: inline-flex;
+  flex-direction: column;
+  font-weight: 700;
+  color: #333;
+  text-decoration: none;
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.logo a:hover {
+  color: var(--brand-color);
+}
+
+.logoLine1 {
+  font-size: 1.4rem;
+}
+
+.logoLine2 {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  align-self: center;
+}
+
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.navLinks li a,
+.navLinks li button {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.navLinks li a:hover,
+.navLinks li button:hover {
+  color: var(--brand-color);
+  transform: scale(1.05);
+}
+
+.navLinks li a.active {
+  border-bottom: 3px solid var(--brand-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Optional: Logout Button Style */
+.logoutButton {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #ff1a1a;
+}
+
+
+.logoutButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
