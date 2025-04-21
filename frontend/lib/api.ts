@@ -291,24 +291,13 @@ export async function fetchStatementWithSales(
 }
 
 export const getStatementDetails = async (statementId: string): Promise<StatementWithSales> => {
-    try {
-      const accessToken = localStorage.getItem('accessToken');
-  
-      if (!accessToken) {
-        throw new Error('Not authenticated');
-      }
-  
-      const response = await api.get<StatementWithSales>(`/statements/${statementId}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-  
-      return response.data;
-    } catch (err) {
-      handleError(err);
-    }
-  };
+  try {
+    const response = await api.get<StatementWithSales>(`/statements/${statementId}`);
+    return response.data;
+  } catch (err) {
+    handleError(err);
+  }
+};
   
 
 // ========== Reports ==========
