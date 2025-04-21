@@ -15,10 +15,11 @@ import styles from "../../components/Dashboard/Dashboard.module.css";
 
 const getCurrentWeekRange = (): [Date, Date] => {
   const now = new Date();
-  const weekStart = new Date(now);
-  const day = weekStart.getDay(); // 0 (Sun) - 6 (Sat)
+  const day = now.getDay(); // 0 (Sun) - 6 (Sat)
   const diffToMonday = day === 0 ? -6 : 1 - day;
-  weekStart.setDate(weekStart.getDate() + diffToMonday);
+
+  const weekStart = new Date(now);
+  weekStart.setDate(now.getDate() + diffToMonday);
   weekStart.setHours(0, 0, 0, 0);
 
   const weekEnd = new Date(weekStart);
@@ -33,7 +34,6 @@ const Dashboard: React.FC = () => {
 
   const [clientStats, setClientStats] = useState({ active: 0, inactive: 0 });
   const [employeeStats, setEmployeeStats] = useState({ active: 0, inactive: 0, onLeave: 0 });
-  const [statementCount, setStatementCount] = useState(0);
   const [weeklyActiveStatements, setWeeklyActiveStatements] = useState<Statement[]>([]);
   const [totalNet, setTotalNet] = useState(0);
   const [totalCash, setTotalCash] = useState(0);
@@ -55,7 +55,6 @@ const Dashboard: React.FC = () => {
         const activeClients = clientsData.filter((c: Client) => c.is_active);
         const inactiveClients = clientsData.length - activeClients.length;
 
-        // Assume employee status: 'active', 'inactive', or 'on leave'
         const activeEmployees = employeesData.filter((e: Employee) => e.status === 'active').length;
         const inactiveEmployees = employeesData.filter((e: Employee) => e.status === 'inactive').length;
         const onLeaveEmployees = employeesData.filter((e: Employee) => e.status === 'on leave').length;
@@ -79,7 +78,6 @@ const Dashboard: React.FC = () => {
 
         setClientStats({ active: activeClients.length, inactive: inactiveClients });
         setEmployeeStats({ active: activeEmployees, inactive: inactiveEmployees, onLeave: onLeaveEmployees });
-        setStatementCount(statementsData.length);
         setWeeklyActiveStatements(weeklyStatements);
         setTotalNet(netSum);
         setTotalCash(cashSum);
@@ -122,10 +120,6 @@ const Dashboard: React.FC = () => {
           </small>
         </div>
         <div className={styles.card}>
-          <h2>{statementCount}</h2>
-          <p>Statements</p>
-        </div>
-        <div className={styles.card}>
           <h2>{formatNumber(totalNet)}</h2>
           <p>Total Net (Current Week)</p>
         </div>
@@ -134,7 +128,9 @@ const Dashboard: React.FC = () => {
           <p>Total Cash Received (Current Week)</p>
         </div>
         <div className={styles.card}>
-          <h2>{formatNumber(finalBalance)}</h2>
+          <h2 style={{ color: finalBalance < 0 ? 'red' : 'green' }}>
+            {finalBalance < 0 ? `-${formatNumber(Math.abs(finalBalance))}` : formatNumber(finalBalance)}
+          </h2>
           <p>Final Balance (Receivable - Payable)</p>
         </div>
       </div>

@@ -18,17 +18,21 @@ const LoginForm: React.FC = () => {
     setLoading(true);
 
     try {
-      // 1️⃣ Send credentials; server sets the HttpOnly session cookie
+      // Send credentials; server sets the HttpOnly session cookie
       await login({ username, password });
 
-      // 2️⃣ Immediately redirect—protected pages will verify the session on mount
       router.push("/dashboard");
-    } catch (err: any) {
-      console.error("Login failed:", err);
-      setError(err.message || "Invalid username or password");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Login failed:", err);
+        setError(err.message || "Invalid username or password");
+      } else {
+        console.error("Login failed with unknown error:", err);
+        setError("Invalid username or password");
+      }
     } finally {
       setLoading(false);
-    }
+    }    
   };
 
   return (

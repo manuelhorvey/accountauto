@@ -8,7 +8,7 @@ import styles from './StatementDetail.module.css';
 const StatementDetail: React.FC = () => {
   const { id: statementId } = useParams<{ id: string }>();
   const [statement, setStatement] = useState<StatementWithSales | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -18,12 +18,15 @@ const StatementDetail: React.FC = () => {
       try {
         const data = await getStatementDetails(statementId);
         setStatement(data);
-      } catch (err: any) {
-        console.error('Error fetching statement:', err);
-        setError(err.message || 'Failed to load statement');
-      } finally {
-        setLoading(false);
-      }
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error('Error fetching statement:', err);
+          setError(err.message || 'Failed to load statement');
+        } else {
+          console.error('Unknown error:', err);
+          setError('An unknown error occurred');
+        }
+      }      
     })();
   }, [statementId]);
 

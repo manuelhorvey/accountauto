@@ -21,8 +21,16 @@ const Reports: React.FC = () => {
         // Fetch all reports using fetchAllReports
         const fetchedReports = await fetchAllReports();
         setReports(fetchedReports); // Set the fetched reports
-      } catch (err) {
-        setError('Failed to fetch reports');
+      }catch (err: unknown) {
+        if (err instanceof Error) {
+          // If it's an instance of Error, access the message
+          console.error('Failed to fetch reports:', err);
+          setError(err.message || 'Failed to fetch reports');
+        } else {
+          // If it's not an Error, fall back to a generic message
+          console.error('Failed to fetch reports with unknown error:', err);
+          setError('Failed to fetch reports');
+        }
       } finally {
         setLoading(false);
       }

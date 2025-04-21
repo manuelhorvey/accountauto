@@ -1,0 +1,48 @@
+# Ignore node modules
+node_modules/
+**/node_modules/
+
+# Ignore .env files (all environments)
+.env
+.env.*
+
+# Ignore build output
+dist/
+build/
+.next/
+out/
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore lock files (optional if using just Yarn)
+package-lock.json
+pnpm-lock.yaml
+
+# Ignore yarn logs and integrity
+yarn-error.log
+.yarn-integrity
+
+# Ignore IDE/project config files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore subfolders' git repos if accidentally initialized
+**/.git
+
+# Ignore next-auth debug cookies if you're using it
+.next-auth/
+
+# Ignore uploads (optional if you store media locally)
+uploads/
+
+# Ignore coverage reports
+coverage/
+
+# Optional: Ignore frontend/.env and backend/.env explicitly (if needed)
+frontend/.env
+backend/.env

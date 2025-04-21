@@ -113,3 +113,24 @@ select {
   -moz-appearance: none;
   /* Firefox */
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .tableContainer, .tableContainer * {
+    visibility: visible;
+  }
+
+  .tableContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

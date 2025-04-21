@@ -19,7 +19,7 @@ const StatementsPage: React.FC = () => {
       try {
         const data = await fetchStatements(clientId);
         setStatements(data);
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(err);
         setError('Failed to load statements.');
       } finally {
@@ -90,7 +90,7 @@ const StatementsPage: React.FC = () => {
                 <td>{s.prev_balance_client.toLocaleString()}</td>
                 <td>{s.cash_received.toLocaleString()}</td>
                 <td>{s.cash_paid.toLocaleString()}</td>
-                <td>{(s as any).expenses?.toLocaleString() ?? '-'}</td>
+                <td>{(s as Statement).expenses?.toLocaleString() ?? '-'}</td>
                 <td>{s.final_receivable.toLocaleString()}</td>
                 <td>{s.final_payable.toLocaleString()}</td>
                 <td className='buttons'>

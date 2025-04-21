@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { fetchClient, updateClient, CreateClientData, Client } from '@/lib/api';
@@ -70,8 +71,13 @@ export default function ClientEdit() {
     try {
       await updateClient(id, form);
       router.push('/dashboard/clients');
-    } catch (err: any) {
-      setError(err?.response?.data?.msg || 'Failed to update client.');
+    }
+    catch (err: unknown) {
+      if (axios.isAxiosError(err) && err.response?.data?.msg) {
+        setError(err.response.data.msg);
+      } else {
+        setError('Failed to update client.');
+      }
     }
   };
 
@@ -150,7 +156,7 @@ export default function ClientEdit() {
               type="checkbox"
               checked={form.is_active}
               onChange={handleChange}
-              className={styles.checkbox} 
+              className={styles.checkbox}
             />{' '}
             Active
           </label>

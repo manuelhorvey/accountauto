@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createReport, CreateReportData, fetchClients, Client } from '@/lib/api';
@@ -49,10 +50,15 @@ const ReportsAdd = () => {
       if (report) {
         router.push('/dashboard/reports');
       }
-    } catch (err: any) {
-      const message =
-        err?.response?.data?.msg || 'Failed to create report';
-      setError(message);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        // Safely access response data if it's an Axios error
+        const message = err.response?.data?.msg || 'Failed to create report';
+        setError(message);
+      } else {
+        // Handle the case where the error is not an Axios error
+        setError('Failed to create report');
+      }
     } finally {
       setLoading(false);
     }

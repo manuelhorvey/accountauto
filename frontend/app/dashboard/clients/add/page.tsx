@@ -31,9 +31,13 @@ const ClientAdd: React.FC = () => {
     try {
       await createClient(data);
       router.push('/dashboard/clients');
-    } catch (err: any) {
-      setError(err.message || 'Error adding client. Please try again.');
-    }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Error adding client. Please try again.');
+      } else {
+        setError('Error adding client. Please try again.');
+      }
+    }    
   };
 
   return (

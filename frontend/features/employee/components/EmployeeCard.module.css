@@ -113,25 +113,3 @@
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
-
-@media print {
-    body * {
-      visibility: hidden;
-    }
-  
-    .tableContainer, .tableContainer * {
-      visibility: visible;
-    }
-  
-    .tableContainer {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-    }
-  
-    .no-print {
-      display: none !important;
-    }
-  }
-  

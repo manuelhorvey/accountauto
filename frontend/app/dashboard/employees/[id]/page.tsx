@@ -51,11 +51,17 @@ const EmployeeEdit = () => {
     try {
       await updateEmployee(id as string, form);
       router.push('/dashboard/employees');
-    } catch (err: any) {
-      setError(err?.response?.data?.message || 'Update failed');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Employee Update failed:", err);
+        setError(err.message || 'Update failed');
+      } else {
+        console.error("Employee Update failed with unknown error:", err);
+        setError("Invalid details");
+      }
     } finally {
       setLoading(false);
-    }
+    }    
   };
 
   if (!employee) return <p>Loading employee data...</p>;

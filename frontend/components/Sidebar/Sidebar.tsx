@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation"; // Added useRouter
+import { usePathname } from "next/navigation";
 import { getCurrentUser, SessionUser } from "@/lib/api";
 import styles from "./Sidebar.module.css";
 
@@ -10,7 +10,6 @@ export default function Sidebar() {
   const [user, setUser] = useState<SessionUser | null>(null);
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
-  const router = useRouter(); // Using useRouter for navigation
 
   useEffect(() => {
     const fetchUser = async () => {
