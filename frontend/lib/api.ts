@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Base API instance
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://dansaviourbooks.onrender.com/api',
   withCredentials: true, // Include cookies
   headers: {
     'Content-Type': 'application/json',
@@ -15,11 +15,13 @@ interface ErrorResponse {
 
 function handleError(error: unknown): never {
   if (axios.isAxiosError(error) && error.response) {
+    console.error('API Error:', error.response.data);
     const data = error.response.data as ErrorResponse;
     throw new Error(data?.msg || 'API Error');
   }
   throw new Error('Network or unknown error');
 }
+
 
 // ========== Auth ==========
 export interface LoginData {

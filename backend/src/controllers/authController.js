@@ -51,11 +51,17 @@ const login = async (req, res) => {
     const accessToken = jwt.sign({ userId: user._id, role: user.role, username: user.username }, SECRET, { expiresIn: "1h" });
     const refreshToken = jwt.sign({ userId: user._id, role: user.role, username: user.username }, SECRET, { expiresIn: "7d" });
 
-    res.json({ accessToken, refreshToken, user });
+    res.json({
+      msg: "Login successful",
+      accessToken,
+      refreshToken,
+      user,
+    });
   } catch (err) {
     res.status(500).json({ msg: "Server error" });
   }
 };
+
 
 // Logout - JWT-based logout (no session handling)
 const logout = (req, res) => {
