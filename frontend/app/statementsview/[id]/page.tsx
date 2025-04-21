@@ -8,7 +8,7 @@ import styles from './StatementDetail.module.css';
 const StatementDetail: React.FC = () => {
   const { id: statementId } = useParams<{ id: string }>();
   const [statement, setStatement] = useState<StatementWithSales | null>(null);
-  const [loading] = useState(true);
+  const [loading, setLoading] = useState(true); // Update loading state
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -16,9 +16,12 @@ const StatementDetail: React.FC = () => {
 
     (async () => {
       try {
+        setLoading(true); // Start loading
         const data = await getStatementDetails(statementId);
         setStatement(data);
+        setLoading(false); // Stop loading
       } catch (err: unknown) {
+        setLoading(false); // Stop loading on error
         if (err instanceof Error) {
           console.error('Error fetching statement:', err);
           setError(err.message || 'Failed to load statement');
@@ -101,7 +104,6 @@ const StatementDetail: React.FC = () => {
       <button onClick={() => window.print()} style={{ marginBottom: '1rem' }}>
         Print Statement
       </button>
-
 
       <footer className={styles.footer}>
         Generated on {new Date().toLocaleDateString()}
