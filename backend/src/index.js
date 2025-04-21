@@ -25,11 +25,13 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true, // Set true only in production with HTTPS
+    secure: process.env.NODE_ENV === 'production', // Set true only in production with HTTPS
     httpOnly: true,
+    sameSite: 'None', // Allow cookies to be sent cross-origin
     maxAge: 1000 * 60 * 60, // 1 hour
   }
 }));
+
 
 //Connect DB
 connectDB();
