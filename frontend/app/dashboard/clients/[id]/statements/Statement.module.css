@@ -1,9 +1,8 @@
 .container {
   padding: 1rem 1.5rem;
-  background: #f9fafb;
+  background: var(--bg-light);
   min-height: calc(100vh - 4rem);
 }
-
 
 .title {
   display: flex;
@@ -15,10 +14,11 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
+  color: var(--text-dark);
 }
 
 .newButton {
-  background-color: #3b82f6;
+  background-color: var(--brand-dark);
   color: white;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -28,11 +28,15 @@
   transition: background-color 0.2s ease;
 }
 
+.newButton:hover {
+  background-color: var(--brand-color);
+}
+
 .tableWrapper {
   overflow-x: auto;
-  background: white;
+  background: var(--bg-white);
   border-radius: 0.375rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-lg);
 }
 
 .table {
@@ -45,24 +49,24 @@
 .table td {
   padding: 0.4rem 0.6rem;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--text-muted);
   font-size: 0.75rem;
-  color: #374151;
+  color: var(--text-dark);
   line-height: 1.2;
 }
 
 .table th {
-  background: #f3f4f6;
+  background: var(--bg-light);
   font-weight: 600;
-  color: #1f2937;
+  color: var(--text-dark);
 }
 
 .table tr:nth-child(even) td {
-  background: #fafafa;
+  background: var(--bg-light);
 }
 
 .table tr:hover td {
-  background: #f1f5f9;
+  background: var(--bg-white);
 }
 
 /* Updated button styling */
@@ -71,7 +75,7 @@
   font-size: 0.7rem;
   border: none;
   border-radius: 0.25rem;
-  background-color: #3b82f6;
+  background-color: var(--brand-dark);
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -79,7 +83,7 @@
 }
 
 .editbutton:hover, .viewbutton:hover {
-  background-color: #2563eb;
+  background-color: var(--brand-color);
 }
 
 /* Updated button container for flexbox */
@@ -87,39 +91,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-}
-
-/* Existing table styles (no change needed) */
-.tableWrapper {
-  overflow-x: auto;
-  background: white;
-  border-radius: 0.375rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-/* Table header and body styles */
-.table th,
-.table td {
-  padding: 0.4rem 0.6rem;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-  font-size: 0.75rem;
-  color: #374151;
-  line-height: 1.2;
-}
-
-.table th {
-  background: #f3f4f6;
-  font-weight: 600;
-  color: #1f2937;
-}
-
-.table tr:nth-child(even) td {
-  background: #fafafa;
-}
-
-.table tr:hover td {
-  background: #f1f5f9;
 }
 
 @media (max-width: 1024px) {

@@ -1,122 +1,125 @@
-/* Dashboard.module.css */
-
 .dashboardWrapper {
   display: flex;
   min-height: 100vh;
-  padding-top: 5rem; /* Adjust for potentially larger or different fixed Navbar */
+  padding-top: 5rem;
   box-sizing: border-box;
-  background-color: #f8f9fa; /* Very light background for overall feel */
+  background: linear-gradient(to right, var(--bg-white), var(--bg-light));
 }
 
 .sidebar {
-  width: 260px; /* Slightly wider sidebar for better content spacing */
+  width: 260px;
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  background-color: #343a40; /* Darker, professional sidebar background */
-  color: #adb5bd; /* Light text color for contrast */
-  padding-top: 2rem; /* Add some top padding */
+  background: linear-gradient(to bottom, #212529, #343a40);
+  color: var(--text-muted);
+  padding-top: 2rem;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar h2 {
-  color: #fff; /* White heading in the sidebar */
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
   padding: 1rem 1.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #495057; /* Subtle separator */
-  font-size: 1.2rem;
-  font-weight: 500;
+  border-bottom: 1px solid #495057;
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
 }
 
 .sidebar li a {
   display: block;
   padding: 1rem 1.5rem;
   text-decoration: none;
-  color: #adb5bd;
-  transition: background-color 0.2s ease;
+  color: var(--text-muted);
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease-in-out;
 }
 
 .sidebar li a:hover {
   background-color: #495057;
-  color: #fff;
+  color: #ffffff;
+  border-left: 4px solid var(--brand-color);
 }
 
 .dashboardContent {
-  margin-left: 260px; /* Adjust margin to match the wider sidebar */
-  padding: 3rem; /* Increased padding for more spacious content area */
+  margin-left: 260px;
+  padding: 3rem; 
   width: calc(100% - 260px);
-  background-color: #fff;
+  background-color: var(--bg-white);
 }
 
 .dashboardHeading {
-  font-size: 2.2rem; /* Slightly reduced heading size for a more subtle feel */
-  font-weight: 600; /* Slightly less bold */
-  color: #343a40; /* Darker heading color */
-  margin-bottom: 2.5rem;
-  text-align: left; /* Align heading to the left for a more formal layout */
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  border-left: 6px solid var(--brand-color);
+  padding-left: 1rem;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Slightly wider min-width for cards */
-  gap: 2.5rem; /* Increased gap for better visual separation */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2.5rem;
 }
 
 .card {
-  background: #ffffff;
-  border-radius: 8px; /* Slightly less rounded corners */
-  padding: 2rem; /* Consistent padding */
-  text-align: left; /* Align text within cards to the left for better readability */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* Subtler shadow */
-  border: 1px solid #e0e0e0; /* Add a very light border */
-  transition: box-shadow 0.2s ease-in-out;
+  background: linear-gradient(to top left, var(--bg-white), var(--bg-light));
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06); /* Slightly enhanced shadow on hover */
-  transform: translateY(-3px); /* Less pronounced hover lift */
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 .card h2 {
-  font-size: 1.8rem; /* Slightly smaller card heading */
-  color: #007bff; /* Professional blue accent color */
+  font-size: 1.8rem; 
+  color: var(--brand-color); 
   margin-bottom: 0.5rem;
 }
 
 .card p {
   font-size: 1rem;
-  color: #6c757d; /* Muted text color */
-  line-height: 1.7; /* Improved line height for readability */
-  margin-bottom: 0; /* Remove default bottom margin */
+  color: var(--text-muted);
+  line-height: 1.7; 
+  margin-bottom: 0; 
 }
 
 .card .value {
-  font-size: 2.8rem; /* Larger font size for the key value */
+  font-size: 2.8rem; 
   font-weight: 700;
-  color: #28a745; /* Professional green for positive values */
+  color: var(--accent-color); 
   margin-bottom: 0.25rem;
 }
 
 .card .label {
   font-size: 0.9rem;
-  color: #6c757d;
-  text-transform: uppercase; /* Subtle emphasis */
+  color: var(--text-muted);
+  text-transform: uppercase; 
 }
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .sidebar {
-    width: 200px; /* Adjust sidebar width on smaller screens */
+    width: 200px; 
   }
 
   .dashboardContent {
-    margin-left: 200px; /* Adjust content margin */
+    margin-left: 200px; 
     padding: 2rem;
   }
 
@@ -134,14 +137,14 @@
 .sectionHeading {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-dark);
   margin-top: 2rem;
   margin-bottom: 1rem;
   text-align: left;
 }
 
 .tableContainer {
-  overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+  overflow-x: auto; 
   margin-bottom: 2rem;
 }
 
@@ -149,28 +152,28 @@
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  font-size: 0.8rem; /* Slightly reduce font size to fit more columns */
-  color: #555;
-  background-color: #fff;
+  font-size: 0.8rem; 
+  color: var(--text-dark);
+  background-color: var(--bg-white);
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .statementTable thead th {
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
   font-weight: 500;
   text-align: left;
-  padding: 0.5rem 0.75rem; /* Reduce padding */
+  padding: 0.5rem 0.75rem; 
   border-bottom: 2px solid #e0e0e0;
-  white-space: nowrap; /* Prevent text wrapping in headers */
+  white-space: nowrap; 
 }
 
 .statementTable tbody td {
-  padding: 0.5rem 0.75rem; /* Reduce padding */
+  padding: 0.5rem 0.75rem; 
   border-bottom: 1px solid #f0f0f0;
-  white-space: nowrap; /* Prevent text wrapping in cells */
+  white-space: nowrap; 
 }
 
 .statementTable tbody tr:last-child td {
@@ -182,17 +185,17 @@
 }
 
 .negative {
-  color: #dc3545; /* Red for negative balance */
+  color: var(--danger-color); /* Red for negative balance */
   font-weight: 500;
 }
 
 .positive {
-  color: #28a745; /* Green for positive balance */
+  color: var(--accent-color); /* Green for positive balance */
   font-weight: 500;
 }
 
 .error {
-  color: #dc3545;
+  color: var(--danger-color);
   font-weight: bold;
   margin-top: 1rem;
 }
@@ -200,34 +203,34 @@
 /* Responsive adjustments for the table */
 @media (max-width: 992px) {
   .statementTable {
-    font-size: 0.7rem; /* Further reduce font size on medium screens */
+    font-size: 0.7rem;
   }
 
   .statementTable thead th,
   .statementTable tbody td {
-    padding: 0.4rem 0.6rem; /* Further reduce padding */
+    padding: 0.4rem 0.6rem; 
   }
 }
 
 @media (max-width: 768px) {
   .statementTable {
-    font-size: 0.6rem; /* Further reduce font size on small screens */
+    font-size: 0.6rem;  
   }
 
   .statementTable thead th,
   .statementTable tbody td {
-    padding: 0.3rem 0.5rem; /* Further reduce padding */
+    padding: 0.3rem 0.5rem; 
   }
 }
 
 @media (max-width: 768px) {
   .dashboardWrapper {
-    flex-direction: column; /* Stack sidebar and content on smaller screens */
-    padding-top: 0; /* Remove top padding when stacking */
+    flex-direction: column;  
+    padding-top: 0;  
   }
 
   .sidebar {
-    position: static; /* Make sidebar scrollable */
+    position: static; 
     width: 100%;
     height: auto;
     margin-bottom: 1.5rem;
@@ -236,17 +239,17 @@
   }
 
   .dashboardContent {
-    margin-left: 0; /* Remove left margin */
+    margin-left: 0; 
     width: 100%;
     padding: 1.5rem;
   }
 
   .dashboardHeading {
-    text-align: center; /* Center heading on smaller screens */
+    text-align: center;
   }
 
   .cards {
-    grid-template-columns: 1fr; /* Single column layout for cards on small screens */
+    grid-template-columns: 1fr; 
     gap: 1.5rem;
   }
 }

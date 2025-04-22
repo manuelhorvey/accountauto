@@ -1,31 +1,35 @@
 /* StatementEdit.module.css */
 
+/* Container with a background color and shadow */
 .container {
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-lg);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #1f2937;
+  color: var(--text-dark);
 }
 
+/* Header styling with border */
 .h2 {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: #111827;
-  border-bottom: 2px solid #e5e7eb;
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--border-light);
   padding-bottom: 0.5rem;
 }
 
+/* Form layout */
 .form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
+/* Row styling with flex properties */
 .row {
   display: flex;
   gap: 1rem;
@@ -36,45 +40,50 @@
   flex: 1;
 }
 
+/* Label styling */
 .label {
   display: block;
   font-size: 1rem;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-muted);
   margin-bottom: 0.5rem;
 }
 
+/* Input fields with transitions for focus state */
 .input {
   width: 100%;
   padding: 0.75rem 1rem;
   font-size: 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-light);
   border-radius: 8px;
-  background-color: #f9fafb;
+  background-color: var(--bg-input);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Focused input styling */
 .input:focus {
-  border-color: #2563eb;
+  border-color: var(--brand-dark);
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
   outline: none;
 }
 
+/* Section title styling */
 .h3 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #111827;
+  color: var(--text-dark);
 }
 
+/* Daily sales grid layout */
 .dailySalesGrid {
-  /* display: grid; */
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
+/* Styling for each daily sales item */
 .dailySalesItem {
   display: flex;
   flex-direction: column;
@@ -90,21 +99,23 @@
   font-size: 0.95rem;
 }
 
+/* Button styling */
 .button {
   align-self: flex-start;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-weight: 600;
-  background-color: #2563eb;
-  color: #ffffff;
+  background-color: var(--brand-dark);
+  color: var(--text-light);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+/* Button hover effect */
 .button:hover {
-  background-color: #1d4ed8;
+  background-color: var(--brand-color);
 }
 
 /* Responsive adjustments */

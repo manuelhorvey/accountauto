@@ -1,75 +1,84 @@
+/* Container styling */
 .container {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .input {
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none; 
-    -moz-appearance: none; 
-  }
-  
-  .input:focus {
-    border-color: #3b82f6;
-  }
-  
-  .input[type="number"] {
-    -moz-appearance: textfield;
-    appearance: textfield; /* Removes spinner from number inputs */
-  }
-  
-  .input[type="number"]::-webkit-outer-spin-button,
-  .input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  .button {
-    padding: 0.75rem;
-    background-color: #3b82f6;
-    color: white;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 1rem;
-  }
-  
-  .button:disabled {
-    background-color: #a0aec0;
-    cursor: not-allowed;
-  }
-  
-  .button:hover {
-    background-color: #2563eb;
-  }
-  
-  .error {
-    color: #dc2626;
-    font-size: 0.875rem;
-    margin-top: -1rem;
-  }
-  
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--bg-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
+}
+
+/* Form container */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Row styling for inputs */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Input field styling */
+.input {
+  padding: 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Focus state for inputs */
+.input:focus {
+  border-color: var(--brand-dark);
+}
+
+/* Styling for number inputs to remove spinners */
+.input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Button styling */
+.button {
+  padding: 0.75rem;
+  background-color: var(--brand-dark);
+  color: var(--bg-light);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+/* Disabled button styling */
+.button:disabled {
+  background-color: var(--button-disabled);
+  cursor: not-allowed;
+}
+
+/* Button hover state */
+.button:hover {
+  background-color: var(--brand-hover);
+}
+
+/* Error message styling */
+.error {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: -1rem;
+}

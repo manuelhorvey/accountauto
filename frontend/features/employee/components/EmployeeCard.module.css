@@ -1,72 +1,39 @@
-/* .card {
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background-color: #ffffff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.name {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-    color: #111827;
-}
-
-.position {
-    font-size: 0.95rem;
-    color: #374151;
-}
-
-.status {
-    font-size: 0.9rem;
-    color: #6b7280;
-}
-
-.phone {
-    font-size: 0.85rem;
-    color: #9ca3af;
-    margin-top: 0.5rem;
-} */
-
 .container {
-    padding: 2rem;
+    padding: 1.5rem; /* Reduced padding for more compactness */
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    font-size: 1.75rem; /* Slightly smaller font size for compactness */
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 1.5rem; /* Reduced bottom margin */
+    border-left: 6px solid var(--brand-dark);
+    padding-left: 1rem;
 }
 
 .header h1 {
-    font-size: 1.75rem;
+    font-size: 1.5rem; /* Adjusted header size */
     font-weight: 700;
-    color: #1f2937;
+    color: var(--text-dark);
 }
 
 .header button {
-    padding: 0.5rem 1.25rem;
-    background-color: #3b82f6;
+    padding: 0.4rem 1rem; /* Reduced padding for compact buttons */
+    background-color: var(--brand-dark);
     color: white;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Slightly smaller font size */
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .header button:hover {
-    background-color: #2563eb;
+    background-color: var(--brand-color);
     transform: scale(1.02);
 }
 
@@ -80,32 +47,32 @@
 .table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.875rem;
-    background-color: #fff;
+    font-size: 0.75rem; /* Reduced font size for a more compact table */
+    background-color: var(--bg-white);
     border-radius: 0.5rem;
     overflow: hidden;
 }
 
 .table th,
 .table td {
-    padding: 0.75rem 1rem;
-    border: 1px solid #e5e7eb;
+    padding: 0.5rem 0.75rem; /* Reduced padding inside cells for compactness */
+    border: 1px solid var(--text-muted);
     text-align: left;
     white-space: nowrap;
 }
 
 .table th {
-    background-color: #f3f4f6;
+    background-color: var(--bg-light);
     font-weight: 600;
-    color: #374151;
+    color: var(--text-dark);
 }
 
 .table tr:nth-child(even) {
-    background-color: #f9fafb;
+    background-color: var(--bg-white);
 }
 
 .table tr:hover {
-    background-color: #eef2f7;
+    background-color: var(--bg-light);
 }
 
 .grid {

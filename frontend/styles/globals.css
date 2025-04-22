@@ -1,45 +1,127 @@
 @import "tailwindcss";
 
-:root {
-  --brand-color: #3b82f6;
-  --brand-dark: #2563eb;
-  --border-radius: 12px;
-  --container-max-width: 1280px;
-
-  --background: linear-gradient(135deg, #f0f4ff, #eaf6ff);
-
-  --foreground: #1e293b;
+/* ==== Global Transition Effects ==== */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* ==== CSS Variables for Theming ==== */
+
+/* Light Mode Variables */
+:root {
+  --brand-color: #60a5fa;  /* Light blue */
+  --brand-dark: #3b82f6;  /* Darker blue */
+  --accent-color: #4ade80;  /* Green accent */
+  --danger-color: #f87171;  /* Red for danger */
+  --text-muted: #6b7280;  /* Muted text (slightly darker than the default) */
+  --bg-light: #f3f4f6;  /* Slightly off-white for softer background */
+  --bg-white: #ffffff;  /* Pure white background */
+  --text-light: #1f2937;  /* Dark text for readability */
+  --text-dark: #111827;  /* Slightly darker text for headings */
+  --border-radius: 0.5rem;
+  --container-max-width: 1280px;
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Softer shadow */
+  --input-focus-border-color: #3b82f6;  /* Border color on focus */
+}
+
+/* Dark Mode Variables */
+/* Dark Mode Variables */
+html.dark {
+  --brand-color: #60a5fa;  /* Keep the same blue for dark mode */
+  --brand-dark: #3b82f6;  /* Darker blue */
+  --accent-color: #4ade80;  /* Green accent */
+  --danger-color: #f87171;  /* Red for danger */
+  --text-muted: #9ca3af;  /* Light gray for muted text */
+  --bg-light: #1f2937;  /* A lighter dark background (milder dark gray) */
+  --bg-white: #2d3a47;  /* Darker "white", but softer grayish tone */
+  --text-light: #e5e7eb;  /* Light text for dark mode */
+  --text-dark: #cbd5e1;  /* Softer text for headings in dark mode */
+  --border-radius: 0.5rem;
+  --container-max-width: 1280px;
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Softer shadow for dark mode */
+  --input-focus-border-color: #3b82f6;  /* Border color on focus */
+}
+
+
+
+/* ==== Global Background Effect ==== */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), transparent 60%);
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.08), transparent 60%),
+              linear-gradient(to bottom right, rgba(255,255,255,0.05), transparent);
   z-index: -1;
 }
 
-.container {
-  max-width: var(--container-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
+/* ==== Base Body Styling ==== */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ==========================
-   Global Link Styles
-   ========================== */
+/* ==== Typography ==== */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-light);
+}
+
+p {
+  color: var(--text-muted);
+}
+
+label {
+  color: var(--text-muted);
+}
+
+/* ==== Form Elements Styling ==== */
+input,
+select,
+textarea {
+  background-color: var(--bg-white);
+  color: var(--text-light);
+  border: 1px solid #334155;
+  border-radius: var(--border-radius);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--brand-color);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.4);
+}
+
+/* ==== Scrollbar Styling ==== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}
+
+/* Dark Mode Scrollbar Thumb */
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(203, 213, 225, 0.2);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(203, 213, 225, 0.4);
+}
+
+/* ==== Global Links ==== */
 a {
   color: var(--brand-color);
-  text-decoration: none;
   font-weight: 500;
+  text-decoration: none;
   transition: color 0.2s ease;
 }
 
@@ -47,69 +129,45 @@ a:hover {
   color: var(--brand-dark);
 }
 
-/* ==========================
-     Global Button Styles
-     ========================== */
+/* ==== Button Styling ==== */
 button {
-  background-color: var(--brand-color);
-  color: #fff;
+  padding: 0.4rem 0.8rem; /* Reduced padding for compactness */
+  font-size: 0.85rem; /* Slightly smaller font size */
+  font-weight: 500;
+  background-color: var(--brand-dark);
+  color: white;
   border: none;
-  border-radius: var(--border-radius);
-  padding: 0.5rem 1.25rem;
-  font-weight: 600;
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
+button:hover {
+  background-color: var(--brand-color);
+  transform: scale(1.02);
+}
+
+button:focus {
+  outline: none; /* Ensures no focus outline */
+}
+
+
 button:hover:not(:disabled) {
   background-color: var(--brand-dark);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 button:disabled {
-  opacity: 0.6;
+  background-color: #cbd5e1;
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
-/* Global styles for common elements */
-h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  text-align: center;
-  color: #333;
+/* ==== Utility Buttons ==== */
+.button-danger {
+  background-color: var(--danger-color);
 }
 
-label {
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-  font-size: 1rem;
-  color: #333;
-}
-
-select {
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
-  appearance: none;
-  /* Ensures consistent styling across browsers */
-  -webkit-appearance: none;
-  /* Safari */
-  -moz-appearance: none;
-  /* Firefox */
-}
-
-/* Ensure no default styling for input fields */
-input,
-select {
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
-  appearance: none;
-  -webkit-appearance: none;
-  /* Safari */
-  -moz-appearance: none;
-  /* Firefox */
+.button-danger:hover {
+  background-color: #dc2626;
 }

@@ -1,69 +1,107 @@
-/* Sidebar Styling */
+/* ==== Sidebar Container ==== */
 .sidebar {
   position: fixed;
-  top: 64px;
+  top: 64px; /* Assuming navbar height */
   left: 0;
-  width: 240px;
+  width: 260px;
   height: calc(100vh - 64px);
-  background-color: #f1f5f9;
-  padding: 2rem 1rem;
-  border-right: 1px solid #e5e7eb;
+  background-color: var(--bg-light);
+  padding: 2rem 1.25rem;
+  border-right: 1px solid var(--border-light);
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
+  z-index: 20;
 }
 
+/* ==== Sidebar Title ==== */
 .sidebarTitle {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--brand-dark);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
 }
 
+/* ==== User Info Box ==== */
 .userInfo {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-left: 0.25rem;
 }
 
 .userName {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--foreground);
+  color: var(--text-dark);
 }
 
 .userRole {
-  font-size: 0.9rem;
-  color: #777;
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
-/* Navigation Styles */
+/* ==== Navigation ==== */
 .nav ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 .nav li {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
+/* ==== Nav Links ==== */
 .nav a {
+  display: block;
   text-decoration: none;
-  color: #1f2937;
   font-weight: 500;
+  color: var(--text-dark);
   padding: 0.75rem 1rem;
-  border-radius: 8px; /* Rounded corners */
-  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 0.5rem;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s;
 }
 
-/* Hover Effect */
+/* ==== Hover Interaction ==== */
 .nav a:hover {
-  background-color: #e0f7fa; /* Light blue background on hover */
-  color: var(--brand-color); /* Change color on hover */
+  background-color: rgba(var(--brand-color-rgb), 0.1); /* Light brand blue */
+  color: var(--brand-color);
+  transform: translateX(4px);
 }
 
-/* Active Link Styles */
+/* ==== Active Link Styling ==== */
 .nav li.active a {
-  background-color: var(--brand-color); /* Brand color for active link */
-  color: #fff; /* White text for active link */
+  background-color: var(--brand-color);
+  color: var(--bg-white);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(var(--brand-color-rgb), 0.25);
 }
 
+/* ==== Responsive Option (Optional) ==== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+    padding: 1rem;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .nav li {
+    margin-bottom: 0;
+  }
+}
