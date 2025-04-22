@@ -17,7 +17,7 @@ export default function HeroSection() {
             reports with a few clicks.
           </p>
           <div className={styles.ctaContainer}>
-            <a href="/statements/new" className={styles.ctaPrimary}>
+            <a href="/dashboard/statements" className={styles.ctaPrimary}>
               Get Started
             </a>
             <a href="#features" className={styles.ctaSecondary}>
