@@ -19,10 +19,10 @@ export default function DashboardLayout({
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await getCurrentUser()
+        await getCurrentUser();
         setLoading(false);
       } catch (err) {
-        console.warn('User not authenticated, redirecting...');
+        console.warn('User not authenticated, redirecting...', err);
         router.push('/login');
       }
     };
