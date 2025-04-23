@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
 
 // Base API instance
 const api = axios.create({
@@ -10,18 +11,23 @@ const api = axios.create({
 });
 
 interface ErrorResponse {
-  msg: string;
+  msg?: string;
+  [key: string]: any;
 }
 
 function handleError(error: unknown): never {
-  if (axios.isAxiosError(error) && error.response) {
-    console.error('API Error:', error.response.data);
-    const data = error.response.data as ErrorResponse;
-    throw new Error(data?.msg || 'API Error');
+  if (axios.isAxiosError(error)) {
+    const err = error as AxiosError<ErrorResponse>;
+
+    if (err.response && err.response.data) {
+      const data = err.response.data;
+      console.error('API Error:', data);
+      throw new Error(data?.msg || 'API Error');
+    }
   }
+
   throw new Error('Network or unknown error');
 }
-
 
 // ========== Auth ==========
 export interface LoginData {
@@ -310,6 +316,7 @@ export interface Report {
   total_gross: number;
   total_wins: number;
   total_net: number;
+  total_expenses:number;
   total_wins_commission: number;
   total_balance_office: number;
   total_balance_client: number;
@@ -331,11 +338,16 @@ export async function fetchAllReports(): Promise<Report[]> {
   try {
     const resp = await api.get<Report[]>('/reports');
     return resp.data;
-  } catch (err) {
-    handleError(err);
-    return [];
+  } catch (err: any) {
+    if (err.response && err.response.status === 404) {
+      // No reports found — return an empty array instead of throwing an error
+      return [];
+    }
+    handleError(err); // Handle other errors
+    return []; // Return an empty array in case of an unknown error
   }
 }
+
 
 
 export type CreateReportData = {

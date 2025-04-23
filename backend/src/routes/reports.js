@@ -77,53 +77,53 @@ router.post("/", auth(["director"]), async (req, res) => {
 });
 
 
-router.get("/:clientId/:period", auth(["director"]), async (req, res) => {
-  const { clientId, period } = req.params;
+// router.get("/:clientId/:period", auth(["director"]), async (req, res) => {
+//   const { clientId, period } = req.params;
 
-  try {
-    const report = await Report.findOne({ client: clientId, period });
+//   try {
+//     const report = await Report.findOne({ client: clientId, period });
 
-    if (!report) {
-      return res.status(404).json({ msg: "Report not found." });
-    }
+//     if (!report) {
+//       return res.status(404).json({ msg: "Report not found." });
+//     }
 
-    const [year, month] = period.split("-").map(Number);
+//     const [year, month] = period.split("-").map(Number);
 
-    const start = new Date(year, month - 1, 1);
-    const end = new Date(year, month, 1); // First day of next month
+//     const start = new Date(year, month - 1, 1);
+//     const end = new Date(year, month, 1); // First day of next month
 
-    const statements = await Statement.find({
-      client: clientId,
-      start_date: { $gte: start, $lt: end }
-    });
+//     const statements = await Statement.find({
+//       client: clientId,
+//       start_date: { $gte: start, $lt: end }
+//     });
 
-    const totals = statements.reduce((acc, stmt) => {
-      acc.total_gross += stmt.gross || 0;
-      acc.total_wins += stmt.wins || 0;
-      acc.total_net += stmt.net || 0;
-      acc.total_wins_commission += stmt.wins_commission_total || 0;
-      acc.total_balance_office += stmt.balance_office || 0;
-      acc.total_balance_client += stmt.balance_client || 0;
-      return acc;
-    }, {
-      total_gross: 0,
-      total_wins: 0,
-      total_net: 0,
-      total_wins_commission: 0,
-      total_balance_office: 0,
-      total_balance_client: 0
-    });
+//     const totals = statements.reduce((acc, stmt) => {
+//       acc.total_gross += stmt.gross || 0;
+//       acc.total_wins += stmt.wins || 0;
+//       acc.total_net += stmt.net || 0;
+//       acc.total_wins_commission += stmt.wins_commission_total || 0;
+//       acc.total_balance_office += stmt.balance_office || 0;
+//       acc.total_balance_client += stmt.balance_client || 0;
+//       return acc;
+//     }, {
+//       total_gross: 0,
+//       total_wins: 0,
+//       total_net: 0,
+//       total_wins_commission: 0,
+//       total_balance_office: 0,
+//       total_balance_client: 0
+//     });
 
-    res.json({
-      report,
-      totals
-    });
+//     res.json({
+//       report,
+//       totals
+//     });
 
-  } catch (err) {
-    console.error("Error fetching report:", err);
-    res.status(500).json({ msg: "Server error." });
-  }
-});
+//   } catch (err) {
+//     console.error("Error fetching report:", err);
+//     res.status(500).json({ msg: "Server error." });
+//   }
+// });
 
 
 // GET /api/reports
@@ -163,6 +163,7 @@ router.get("/", auth(["director"]), async (req, res) => {
             acc.total_wins_commission += stmt.wins_commission_total || 0;
             acc.total_balance_office += stmt.balance_office || 0;
             acc.total_balance_client += stmt.balance_client || 0;
+            acc.total_expenses += stmt.expenses || 0;
             return acc;
           },
           {
@@ -171,7 +172,8 @@ router.get("/", auth(["director"]), async (req, res) => {
             total_net: 0,
             total_wins_commission: 0,
             total_balance_office: 0,
-            total_balance_client: 0
+            total_balance_client: 0,
+            total_expenses: 0,
           }
         );
 
@@ -227,6 +229,7 @@ router.get("/:id", auth(["director"]), async (req, res) => {
         acc.total_wins_commission += stmt.wins_commission_total || 0;
         acc.total_balance_office += stmt.balance_office || 0;
         acc.total_balance_client += stmt.balance_client || 0;
+        acc.total_expenses += stmt.expenses || 0;
         return acc;
       },
       {
@@ -235,7 +238,8 @@ router.get("/:id", auth(["director"]), async (req, res) => {
         total_net: 0,
         total_wins_commission: 0,
         total_balance_office: 0,
-        total_balance_client: 0
+        total_balance_client: 0,
+        total_expenses: 0,
       }
     );
 

@@ -79,7 +79,7 @@ const StatementAdd: React.FC = () => {
           <input name="wins" type="number" placeholder="Wins" onChange={handleChange} className={styles.input} />
           <input name="cash_received" type="number" placeholder="Cash Received" onChange={handleChange} className={styles.input} />
           <input name="cash_paid" type="number" placeholder="Cash Paid" onChange={handleChange} className={styles.input} />
-          <input name="expense" type="number" placeholder="Expense" onChange={handleChange} className={styles.input} />
+          <input name="expenses" type="number" placeholder="Expense" onChange={handleChange} className={styles.input} />
         </div>
 
         <h3>Daily Sales</h3>

@@ -1,11 +1,12 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import ReportTable from '@/features/report/components/ReportTable';
-import { Report } from '@/lib/api'; 
-import { fetchAllReports } from '@/lib/api';  
+import { Report } from '@/lib/api';
+import { fetchAllReports } from '@/lib/api';
 import { useRouter } from 'next/navigation';
+import styles from '@/features/report/components/ReportTable.module.css';
 
-const Reports: React.FC = () => {
+const Reports = () => {
   // Local state for reports, loading, and error
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -21,7 +22,7 @@ const Reports: React.FC = () => {
         // Fetch all reports using fetchAllReports
         const fetchedReports = await fetchAllReports();
         setReports(fetchedReports);
-      }catch (err: unknown) {
+      } catch (err: unknown) {
         if (err instanceof Error) {
           // If it's an instance of Error, access the message
           console.error('Failed to fetch reports:', err);
@@ -39,16 +40,8 @@ const Reports: React.FC = () => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   const handleNewClick = () => {
-    router.push('/dashboard/reports/add'); 
+    router.push('/dashboard/reports/add');
   };
 
   const handleView = (reportId: string) => {
@@ -56,17 +49,22 @@ const Reports: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="header">
-        <button className="new-button" onClick={handleNewClick}>New</button>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>Reports</h1>
+        <button className={styles.newbutton} onClick={handleNewClick}>New</button>
       </div>
-      {reports.length > 0 ? (
+
+      {loading && <div>Loading reports...</div>}
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+
+      {!loading && !error && reports.length > 0 ? (
         <ReportTable reports={reports} onView={handleView} />
       ) : (
-        <div>No reports available</div>
+        !loading && !error && <div>No reports available</div>
       )}
     </div>
   );
-};
+}
 
 export default Reports;
