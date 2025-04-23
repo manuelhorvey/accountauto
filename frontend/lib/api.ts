@@ -355,7 +355,6 @@ export async function createReport(data: CreateReportData): Promise<Report> {
   }
 }
 
-
 export const getReportById = async (id: string): Promise<Report> => {
   try {
     const response = await api.get<Report>(`/reports/${id}`, {
