@@ -6,7 +6,6 @@
 }
 
 /* ==== CSS Variables for Theming ==== */
-
 /* Light Mode Variables */
 :root {
   --brand-color: #60a5fa;  /* Light blue */
@@ -24,7 +23,6 @@
   --input-focus-border-color: #3b82f6;  /* Border color on focus */
 }
 
-/* Dark Mode Variables */
 /* Dark Mode Variables */
 html.dark {
   --brand-color: #60a5fa;  /* Keep the same blue for dark mode */

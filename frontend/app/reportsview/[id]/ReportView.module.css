@@ -1,0 +1,120 @@
+/* ReportView.module.css */
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .card {
+    background-color: var(--bg-light);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 1.25rem;
+    border-bottom: 2px solid var(--brand-dark);
+    margin-bottom: 2rem;
+  }
+  
+  .companyInfo h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--brand-dark);
+  }
+  
+  .companyInfo p {
+    margin: 0.2rem 0;
+    color: var(--text-muted);
+  }
+  
+  .statementStatus {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    align-self: center;
+    text-align: right;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .label {
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+  
+  .fullWidth {
+    grid-column: 1 / -1;
+  }
+  
+  .printButton {
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--brand-dark);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .printButton:hover {
+    background-color: var(--brand-color);
+    transform: translateY(-1px);
+  }
+  
+  .error {
+    color: var(--danger-color);
+    text-align: center;
+    padding: 1rem;
+    font-weight: 600;
+  }
+  
+  .loadingSkeleton {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  
+  .empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem;
+    font-size: 1rem;
+  }
+  
+  /* Print Styles */
+  @media print {
+    .printButton,
+    .loadingSkeleton,
+    .error {
+      display: none !important;
+    }
+  
+    .container {
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      border: none;
+    }
+  
+    body {
+      background: white !important;
+      color: black !important;
+    }
+  }
+  

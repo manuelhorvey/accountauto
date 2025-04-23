@@ -43,7 +43,7 @@ const StatementDetail: React.FC = () => {
       : statement.client?.name || 'Unknown';
 
   return (
-    <div className={styles.a4Container}>
+    <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.companyInfo}>
           <h1>DAN SAVIOUR ENTERPRISE</h1>
@@ -78,7 +78,6 @@ const StatementDetail: React.FC = () => {
       </section>
 
       <section className={styles.financials}>
-
         <p><strong>Gross:</strong> {statement.gross?.toLocaleString() ?? '0'}</p>
         <p><strong>Wins:</strong> {statement.wins?.toLocaleString() ?? '0'}</p>
         <p><strong>Wins Total:</strong> {statement.wins_commission_total?.toLocaleString() ?? '0'}</p>
@@ -98,7 +97,6 @@ const StatementDetail: React.FC = () => {
             <p><strong>Final Payable:</strong> {statement.final_payable?.toLocaleString() ?? '0'}</p>
           </div>
         </div>
-
       </section>
 
       <button onClick={() => window.print()} style={{ marginBottom: '1rem' }}>

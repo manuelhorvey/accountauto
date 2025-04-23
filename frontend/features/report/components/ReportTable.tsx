@@ -4,9 +4,10 @@ import styles from './ReportTable.module.css'; // Import the CSS module
 
 interface ReportTableProps {
   reports: Report[];
+  onView: (id: string) => void;
 }
 
-const ReportTable: React.FC<ReportTableProps> = ({ reports }) => {
+const ReportTable: React.FC<ReportTableProps> = ({ reports, onView }) => {
   return (
     <div className={styles.tableContainer}>
       <h2 className={styles.tableHeader}>Report Overview</h2>
@@ -25,6 +26,7 @@ const ReportTable: React.FC<ReportTableProps> = ({ reports }) => {
             <th>Total Balance (Client)</th>
             <th>Generated At</th>
             <th>Notes</th>
+            <th>Action</th> {/* New column */}
           </tr>
         </thead>
         <tbody>
@@ -42,6 +44,14 @@ const ReportTable: React.FC<ReportTableProps> = ({ reports }) => {
               <td>{report.total_balance_client}</td>
               <td>{report.generated_at}</td>
               <td>{report.notes}</td>
+              <td>
+                <button
+                  onClick={() => onView(report._id)}
+                  className={styles.viewButton}
+                >
+                  View
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

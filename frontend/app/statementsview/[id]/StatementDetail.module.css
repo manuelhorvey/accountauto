@@ -1,16 +1,10 @@
-.a4Container {
-  max-width: 210mm;
-  min-height: 297mm;
-  margin: 1rem auto;
+.container {
+  max-width: var(--container-max-width);
+  margin: 2rem auto;
   padding: 2rem;
-  background: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  box-sizing: border-box;
-  color: #1f2937;
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Header */
@@ -25,18 +19,19 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
+  color: var(--brand-dark);
 }
 
 .companyInfo p {
   margin: 0.15rem 0;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-muted);
 }
 
 .statementStatus {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--brand-dark);
   text-align: right;
   margin-top: 0.5rem;
   white-space: nowrap;
@@ -54,6 +49,7 @@
 .clientInfo p {
   margin: 0.1rem 0;
   font-size: 0.95rem;
+  color: var(--text-muted);
 }
 
 /* Daily Sales */
@@ -61,18 +57,16 @@
   margin: 1rem 0;
 }
 
-
 .dailySales h3 {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  /* text-align: center; */
   margin-left: 2.8rem;
   text-decoration: underline;
+  color: var(--text-dark);
 }
 
 .salesGrid {
-  /* display: grid; */
   grid-template-columns: repeat(2, 1fr);
   gap: 0.3rem 1rem;
   max-width: 600px;
@@ -86,6 +80,7 @@
   font-size: 0.9rem;
   border-bottom: 1px dashed #e5e7eb;
   padding-bottom: 0.2rem;
+  color: var(--text-light);
 }
 
 /* Financials */
@@ -96,6 +91,7 @@
 .financials p {
   margin: 0.3rem 0;
   font-size: 0.95rem;
+  color: var(--text-light);
 }
 
 /* Office & Client Split */
@@ -106,8 +102,8 @@
   margin-top: 1.5rem;
   padding: 1rem;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  background-color: #f9fafb;
+  border-radius: var(--border-radius);
+  background-color: var(--bg-light);
 }
 
 .Offc,
@@ -119,6 +115,7 @@
 .Cli p {
   margin: 0.3rem 0;
   font-size: 0.9rem;
+  color: var(--text-light);
 }
 
 /* Footer */
@@ -126,7 +123,7 @@
   margin-top: 2rem;
   font-size: 0.8rem;
   text-align: right;
-  color: #6b7280;
+  color: var(--text-muted);
   font-style: italic;
 }
 
@@ -134,53 +131,30 @@
 .status {
   text-align: center;
   margin: 2rem 0;
-  color: #555;
+  color: var(--text-muted);
 }
 
 .error {
-  color: #b91c1c;
+  color: var(--danger-color);
 }
 
 /* Print Styles */
 @media print {
-  @page {
-    size: A4;
-    margin: 0;
+  .printButton,
+  .loadingSkeleton,
+  .error {
+    display: none !important;
   }
 
-  /* html,
-  body {
-    width: 210mm;
-    height: 297mm;
-    margin: 0;
+  .container {
+    box-shadow: none;
     padding: 0;
-    background: #fff !important;
-    overflow: hidden;
-  } */
-
-  .a4Container {
-    width: 100%;
-    height: 100%;
-    padding: 20mm;
     margin: 0;
     border: none;
-    box-shadow: none;
-    page-break-inside: avoid;
-    page-break-after: avoid;
   }
 
-  .footer {
-    position: absolute;
-    bottom: 20mm;
-    left: 0;
-    right: 0;
-  }
-
-  .status {
-    display: none;
-  }
-
-  .button {
-    display: none;
+  body {
+    background: white !important;
+    color: black !important;
   }
 }

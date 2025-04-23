@@ -191,6 +191,66 @@ router.get("/", auth(["director"]), async (req, res) => {
   }
 });
 
+// GET /api/reports/id 
+router.get("/:id", auth(["director"]), async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the report ID from the request parameters
+
+    // Fetch the specific report by ID from the Report model
+    const report = await Report.findById(id);
+
+    if (!report) {
+      return res.status(404).json({ msg: "Report not found." });
+    }
+
+    // Fetch client details using clientId
+    const client = await Client.findById(report.client);
+    const clientName = client ? client.name : 'Unknown'; 
+
+    // Get the start and end date for the report's period
+    const [year, month] = report.period.split("-").map(Number);
+    const start = new Date(year, month - 1, 1);
+    const end = new Date(year, month, 1); // First day of next month
+
+    // Fetch the statements for the given period
+    const statements = await Statement.find({
+      client: report.client,
+      due_date: { $gte: start, $lt: end }
+    });
+
+    // Calculate the totals from the statements
+    const totals = statements.reduce(
+      (acc, stmt) => {
+        acc.total_gross += stmt.gross || 0;
+        acc.total_wins += stmt.wins || 0;
+        acc.total_net += stmt.net || 0;
+        acc.total_wins_commission += stmt.wins_commission_total || 0;
+        acc.total_balance_office += stmt.balance_office || 0;
+        acc.total_balance_client += stmt.balance_client || 0;
+        return acc;
+      },
+      {
+        total_gross: 0,
+        total_wins: 0,
+        total_net: 0,
+        total_wins_commission: 0,
+        total_balance_office: 0,
+        total_balance_client: 0
+      }
+    );
+
+    // Return the report with totals and the client name
+    res.json({
+      ...report.toObject(),
+      ...totals,
+      clientName: clientName
+    });
+  } catch (err) {
+    console.error("Error fetching report:", err);
+    res.status(500).json({ msg: "Server error." });
+  }
+});
+
 
 // DELETE /api/reports/:reportId
 router.delete("/:reportId", auth(["director"]), async (req, res) => {
@@ -216,6 +276,7 @@ router.delete("/:reportId", auth(["director"]), async (req, res) => {
     res.status(500).json({ msg: "Server error." });
   }
 });
+
 
 
 module.exports = router;

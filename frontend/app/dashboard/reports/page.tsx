@@ -20,7 +20,7 @@ const Reports: React.FC = () => {
       try {
         // Fetch all reports using fetchAllReports
         const fetchedReports = await fetchAllReports();
-        setReports(fetchedReports); // Set the fetched reports
+        setReports(fetchedReports);
       }catch (err: unknown) {
         if (err instanceof Error) {
           // If it's an instance of Error, access the message
@@ -50,13 +50,18 @@ const Reports: React.FC = () => {
   const handleNewClick = () => {
     router.push('/dashboard/reports/add'); 
   };
+
+  const handleView = (reportId: string) => {
+    router.push(`/reportsview/${reportId}`);
+  };
+
   return (
     <div>
       <div className="header">
         <button className="new-button" onClick={handleNewClick}>New</button>
       </div>
       {reports.length > 0 ? (
-        <ReportTable reports={reports} />
+        <ReportTable reports={reports} onView={handleView} />
       ) : (
         <div>No reports available</div>
       )}
