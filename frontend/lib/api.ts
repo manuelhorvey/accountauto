@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, isAxiosError } from 'axios';
 
 
 // Base API instance
@@ -12,7 +12,7 @@ const api = axios.create({
 
 interface ErrorResponse {
   msg?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 function handleError(error: unknown): never {
@@ -338,15 +338,17 @@ export async function fetchAllReports(): Promise<Report[]> {
   try {
     const resp = await api.get<Report[]>('/reports');
     return resp.data;
-  } catch (err: any) {
-    if (err.response && err.response.status === 404) {
+  } catch (err: unknown) {
+    if (isAxiosError(err) && err.response?.status === 404) {
       // No reports found — return an empty array instead of throwing an error
       return [];
     }
-    handleError(err); // Handle other errors
+
+    handleError(err); // Handle other errors (could log or show a toast, etc.)
     return []; // Return an empty array in case of an unknown error
   }
 }
+
 
 
 
