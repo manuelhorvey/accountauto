@@ -9,7 +9,7 @@ const app = express();
 
 // CORS config
 const corsOptions = {
-  origin: "dansaviourbooks.vercel.app", // Frontend origin
+  origin: "https://dansaviourbooks.vercel.app", // Frontend origin
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true, // Required for sending cookies
