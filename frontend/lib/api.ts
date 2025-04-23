@@ -356,16 +356,16 @@ export async function createReport(data: CreateReportData): Promise<Report> {
 }
 
 
-export async function getReportById(id: string): Promise<Report> {
+export const getReportById = async (id: string): Promise<Report> => {
   try {
-    // Make a GET request to the endpoint that fetches a single report
-    const resp = await api.get<Report>(`/reports/${id}`);
-    return resp.data; // Return the report data
+    const response = await api.get<Report>(`/reports/${id}`, {
+      withCredentials: true,
+    });
+    return response.data;
   } catch (err) {
-    // Rethrow the error so it can be handled by the component
-    throw err;
+    handleError(err);
   }
-}
+};
 
 
 
