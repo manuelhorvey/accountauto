@@ -13,20 +13,26 @@ import {
 } from "@/lib/api";
 import styles from "../../components/Dashboard/Dashboard.module.css";
 
-const getCurrentWeekRange = (): [Date, Date] => {
+// UPDATED: Get the previous Monday–Sunday week
+const getPreviousWeekRange = (): [Date, Date] => {
   const now = new Date();
   const day = now.getDay(); // 0 (Sun) - 6 (Sat)
+
+  // Find current week's Monday
+  const currentMonday = new Date(now);
   const diffToMonday = day === 0 ? -6 : 1 - day;
+  currentMonday.setDate(now.getDate() + diffToMonday);
+  currentMonday.setHours(0, 0, 0, 0);
 
-  const weekStart = new Date(now);
-  weekStart.setDate(now.getDate() + diffToMonday);
-  weekStart.setHours(0, 0, 0, 0);
+  // Find previous week's Monday and Sunday
+  const previousMonday = new Date(currentMonday);
+  previousMonday.setDate(currentMonday.getDate() - 7);
 
-  const weekEnd = new Date(weekStart);
-  weekEnd.setDate(weekStart.getDate() + 6);
-  weekEnd.setHours(23, 59, 59, 999);
+  const previousSunday = new Date(previousMonday);
+  previousSunday.setDate(previousMonday.getDate() + 6);
+  previousSunday.setHours(23, 59, 59, 999);
 
-  return [weekStart, weekEnd];
+  return [previousMonday, previousSunday];
 };
 
 const Dashboard: React.FC = () => {
@@ -40,6 +46,7 @@ const Dashboard: React.FC = () => {
   const [finalBalance, setFinalBalance] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [weekRange, setWeekRange] = useState<[Date, Date] | null>(null); // NEW: store previous week range
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +66,8 @@ const Dashboard: React.FC = () => {
         const inactiveEmployees = employeesData.filter((e: Employee) => e.status === 'inactive').length;
         const onLeaveEmployees = employeesData.filter((e: Employee) => e.status === 'on leave').length;
 
-        const [weekStart, weekEnd] = getCurrentWeekRange();
+        const [weekStart, weekEnd] = getPreviousWeekRange();
+        setWeekRange([weekStart, weekEnd]); // set it for display
 
         const activeClientIds = activeClients.map((client) => client._id);
         const weeklyStatements = statementsData.filter((s) => {
@@ -100,11 +108,24 @@ const Dashboard: React.FC = () => {
     return n.toFixed(2);
   };
 
+  const formatWeekRange = (range: [Date, Date]) => {
+    const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+    const [start, end] = range;
+    return `${start.toLocaleDateString(undefined, options)} - ${end.toLocaleDateString(undefined, options)}`;
+  };
+
   if (loading) return <p>Loading dashboard…</p>;
 
   return (
     <div className={styles.dashboardContainer}>
       <h1 className={styles.dashboardHeading}>Dashboard Overview</h1>
+
+      {/* Display the week range */}
+      {weekRange && (
+        <p style={{ marginBottom: "1rem", fontWeight: "bold" }}>
+          Showing Data for: {formatWeekRange(weekRange)}
+        </p>
+      )}
 
       <div className={styles.cards}>
         <div className={styles.card}>
@@ -121,11 +142,11 @@ const Dashboard: React.FC = () => {
         </div>
         <div className={styles.card}>
           <h2>{formatNumber(totalNet)}</h2>
-          <p>Total Net (Current Week)</p>
+          <p>Total Net (Previous Week)</p>
         </div>
         <div className={styles.card}>
           <h2>{formatNumber(totalCash)}</h2>
-          <p>Total Cash Received (Current Week)</p>
+          <p>Total Cash Received (Previous Week)</p>
         </div>
         <div className={styles.card}>
           <h2 style={{ color: finalBalance < 0 ? 'red' : 'green' }}>
