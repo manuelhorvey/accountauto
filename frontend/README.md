@@ -58,7 +58,7 @@ DanSaviour Enterprise provides an intuitive dashboard for:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-org/dansaviour-enterprise.git
+git git@github.com:manuelhorvey/accountauto.git
 cd dansaviour-enterprise
 ```
 
